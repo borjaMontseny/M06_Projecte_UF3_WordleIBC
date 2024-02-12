@@ -27,14 +27,8 @@
 #teclat th,
 #teclat td {
     border: 1px solid black;
-    width: 50px;
-    /* Ancho fijo de la celda */
-    height: 50px;
-    /* Alto fijo de la celda */
     text-align: center;
-    /* Centrar el texto */
     border-radius: 10px;
-    /* Bordes redondeados */
 }
 
 #teclat td:hover {
