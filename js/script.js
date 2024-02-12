@@ -2,22 +2,16 @@
 
 window.onload = function () {
 
-    class jugadorInicial {
+    // Jugador que es crea al formulari
+    class Jugador {
         constructor(nom, cognom, correuElectronic, telefon) {
             this.nom = nom;
             this.cognom = cognom;
             this.correuElectronic = correuElectronic;
             this.telefon = telefon;
         }
-    }
 
-    class jugadorAGuardar {
-        constructor(nom, cognom, correuElectronic, telefon) {
-            this.nom = nom;
-            this.cognom = cognom;
-            this.correuElectronic = correuElectronic;
-            this.telefon = telefon;
-        }
+        // falta un constructor amb les dades de la partida, estadistiques etc. sino per defecte serien 0 al constructor de adalt
     }
 
     document.getElementById('formulariJoc').addEventListener('submit', function (event) {
@@ -28,7 +22,7 @@ window.onload = function () {
         var correuElectronic = document.getElementById('correuElectronic').value;
         var telefon = document.getElementById('telefon').value;
 
-        const jugador = new JugadorInicial(nom, cognom, correuElectronic, telefon);
+        const jugador = new Jugador(nom, cognom, correuElectronic, telefon);
 
         // guardem les dades del jugador en el LocalStorage
         localStorage.setItem('jugador', JSON.stringify(jugador));
