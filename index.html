@@ -1,0 +1,82 @@
+<!-- borjaMontseny & AdriaChillon DAW2 M06 2024 -->
+<!DOCTYPE html>
+<html lang="ca" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>WORDLE IBC</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+    <div id="formulari" class="visible">
+        <form id="formulariJoc">
+            <table>
+                <tr>
+                    <td><label for="nom">Nom:</label></td>
+                    <td><input type="text" id="nom" required></td>
+                </tr>
+                <tr>
+                    <td><label for="cognom">Cognom:</label></td>
+                    <td><input type="text" id="cognom" required></td>
+                </tr>
+                <tr>
+                    <td><label for="correuElectronic">Correu Electrònic:</label></td>
+                    <td><input type="text" id="correuElectronic" required></td>
+                </tr>
+                <tr>
+                    <td><label for="telefon">Telèfon:</label></td>
+                    <td><input type="text" id="telefon" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><button type="submit">GAME START</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="joc" class="ocult">
+        <table id="teclat">
+            <tr>
+                <td>Q</td>
+                <td>W</td>
+                <td>E</td>
+                <td>R</td>
+                <td>T</td>
+                <td>Y</td>
+                <td>U</td>
+                <td>I</td>
+                <td>O</td>
+                <td>P</td>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>S</td>
+                <td>D</td>
+                <td>F</td>
+                <td>G</td>
+                <td>H</td>
+                <td>J</td>
+                <td>K</td>
+                <td>L</td>
+                <td>Ç</td>
+            </tr>
+            <tr>
+                <td>Z</td>
+                <td>X</td>
+                <td>C</td>
+                <td>V</td>
+                <td>B</td>
+                <td>N</td>
+                <td>M</td>
+                <td colspan="2">Borrar</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

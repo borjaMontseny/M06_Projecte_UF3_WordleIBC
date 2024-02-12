@@ -1,0 +1,42 @@
+/* borjaMontseny & AdriaChillon DAW2 M06 2024 */
+.visible {
+    display: block;
+}
+
+.ocult {
+    display: none;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#formulari {
+    width: 400px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+/* CSS del teclat */
+#teclat table,
+#teclat th,
+#teclat td {
+    border: 1px solid black;
+    width: 50px;
+    /* Ancho fijo de la celda */
+    height: 50px;
+    /* Alto fijo de la celda */
+    text-align: center;
+    /* Centrar el texto */
+    border-radius: 10px;
+    /* Bordes redondeados */
+}
+
+#teclat td:hover {
+    background-color: lightgray;
+}
