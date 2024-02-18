@@ -9,7 +9,7 @@
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </head>
 
 <body>
@@ -18,19 +18,19 @@
             <table>
                 <tr>
                     <td><label for="nom">Nom:</label></td>
-                    <td><input type="text" id="nom" required></td>
+                    <td><input type="text" id="nom" required><i id="checkNom" class="ocult">✔️</i></td>
                 </tr>
                 <tr>
                     <td><label for="cognom">Cognom:</label></td>
-                    <td><input type="text" id="cognom" required></td>
+                    <td><input type="text" id="cognom" required><i id="checkCognom" class="ocult">✔️</i></td>
                 </tr>
                 <tr>
                     <td><label for="correuElectronic">Correu Electrònic:</label></td>
-                    <td><input type="text" id="correuElectronic" required></td>
+                    <td><input type="text" id="correuElectronic" required><i id="checkCorreuElectronic" class="ocult">✔️</i></td>
                 </tr>
                 <tr>
                     <td><label for="telefon">Telèfon:</label></td>
-                    <td><input type="text" id="telefon" required></td>
+                    <td><input type="text" id="telefon" required><i id="checkTelefon" class="ocult">✔️</i></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center"><button type="submit">GAME START</button></td>
