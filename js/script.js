@@ -1,5 +1,5 @@
 // Borja Montseny & Adria Chillon DAW2 M06 2024
-import Swal from './SweetAlert2/sweetalert2.all.js'; // Per a que funcionin les alertes SweetAlert2
+
 import dic from './diccionari.js'; // Importem la variable del fitxer diccionari.js
 
 class Jugador {
@@ -84,7 +84,7 @@ window.onload = function () {
         }
     })
 
-    document.getElementById('formulariJoc').addEventListener('submit', function (event) {
+    document.getElementById('gameStartButton').addEventListener('click', function (event) {
         event.preventDefault();
 
         if (isNomValid && isCognomValid && isCorreuElectronicValid && isTelefonValid) {
@@ -97,6 +97,7 @@ window.onload = function () {
             mostrarOAmagarElement("amagar", formulari);
             mostrarOAmagarElement("mostrar", joc);
         } else {
+            // Utiliza SweetAlert2 para mostrar el mensaje de error
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
