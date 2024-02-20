@@ -1,4 +1,5 @@
 // Borja Montseny & Adria Chillon DAW2 M06 2024
+import Swal from 'sweetalert2'; // Per a que funcionin les alertes SweetAlert2
 import dic from './diccionari.js'; // Importem la variable del fitxer diccionari.js
 
 class Jugador {
