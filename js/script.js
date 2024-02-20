@@ -56,29 +56,44 @@ window.onload = function () {
 
     nom.addEventListener("input", function () {
         isNomValid = comprobarRegExp(regExpBasica, nom.value);
-        mostrarOAmagarElement(isNomValid, checkNom);
+        if (isNomValid) {
+            mostrarOAmagarElement("mostrar", checkNom);
+        }
     });
 
     cognom.addEventListener("input", function () {
         isCognomValid = comprobarRegExp(regExpBasica, cognom.value);
-        mostrarOAmagarElement(isCognomValid, checkCognom);
+        if (isCognomValid) {
+            mostrarOAmagarElement("mostrar", checkCognom);
+        }
     });
 
     correuElectronic.addEventListener("input", function () {
         isCorreuElectronicValid = comprobarRegExp(regExpCorreuElectronic, correuElectronic.value);
-        mostrarOAmagarElement(isCorreuElectronicValid, checkCorreuElectronic);
+        if (isCorreuElectronicValid) {
+            mostrarOAmagarElement("mostrar", checkCorreuElectronic);
+        }
     });
 
     telefon.addEventListener("input", function () {
         isTelefonValid = comprobarRegExp(regExpTelefon, telefon.value);
-        mostrarOAmagarElement(isTelefonValid, checkTelefon);
+        if (isTelefonValid) {
+            mostrarOAmagarElement("mostrar", checkTelefon);
+        }
     })
 
     document.getElementById('formulariJoc').addEventListener('submit', function (event) {
         event.preventDefault();
 
         if (isNomValid && isCognomValid && isCorreuElectronicValid && isTelefonValid) {
+            // Un cop el forumulari está validat, l'amaguem
             mostrarOAmagarElement("amagar", formulari);
+
+            // Instanciem jugador amb les dades ja validades, i el guardem a localStorage
+            var jugador = new Jugador(nom.value, cognom.value, correuElectronic.value, telefon.value, 0, 0, 0, 0);
+            localStorage.setItem('jugador', JSON.stringify(jugador));
+            mostrarOAmagarElement("amagar", formulari);
+            mostrarOAmagarElement("mostrar", joc);
         } else {
             Swal.fire({
                 icon: 'error',
@@ -86,10 +101,5 @@ window.onload = function () {
                 text: 'Valida tots els camps per a començar la partida',
             });
         }
-
-        var jugador = new Jugador(nom.value, cognom.value, correuElectronic.value, telefon.value, 0, 0, 0, 0);
-        localStorage.setItem('jugador', JSON.stringify(jugador));
-        mostrarOAmagarElement("amagar", formulari);
-        mostrarOAmagarElement("mostrar", joc);
     });
 }
