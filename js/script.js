@@ -54,6 +54,7 @@ window.onload = function () {
     var telefon = document.getElementById('telefon');
     var checkTelefon = document.getElementById('checkTelefon');
 
+    // FORMULARI
     nom.addEventListener("input", function () {
         isNomValid = comprobarRegExp(regExpBasica, nom.value);
         if (isNomValid) {
@@ -102,4 +103,6 @@ window.onload = function () {
             });
         }
     });
+
+    // JOC
 }
