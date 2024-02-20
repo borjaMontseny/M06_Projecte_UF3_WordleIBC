@@ -9,6 +9,7 @@
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="sweetalert2/sweetalert2.css">
     <script type="module" src="js/script.js"></script>
 </head>
 
@@ -23,17 +24,18 @@
                 </tr>
                 <tr>
                     <td><label for="cognom">Cognom:</label></td>
-                    <td><input type="text" id="cognom" required><i id="checkCognom" class="ocult">✔️</i></td>
-                    <td></td>
+                    <td><input type="text" id="cognom" required></td>
+                    <td><i id="checkCognom" class="ocult">✔️</i></td>
                 </tr>
                 <tr>
                     <td><label for="correuElectronic">Correu Electrònic:</label></td>
-                    <td><input type="text" id="correuElectronic" required><i id="checkCorreuElectronic" class="ocult">✔️</i></td>
-                    <td></td>
+                    <td><input type="text" id="correuElectronic" required></td>
+                    <td><i id="checkCorreuElectronic" class="ocult">✔️</i></td>
                 </tr>
                 <tr>
                     <td><label for="telefon">Telèfon:</label></td>
-                    <td><input type="text" id="telefon" required><i id="checkTelefon" class="ocult">✔️</i></td>
+                    <td><input type="text" id="telefon" required></td>
+                    <td><i id="checkTelefon" class="ocult">✔️</i></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center"><button type="submit">GAME START</button></td>
@@ -41,45 +43,51 @@
             </table>
         </form>
     </div>
-
     <div id="joc" class="ocult">
-        <table id="teclat">
-            <tr>
-                <td>Q</td>
-                <td>W</td>
-                <td>E</td>
-                <td>R</td>
-                <td>T</td>
-                <td>Y</td>
-                <td>U</td>
-                <td>I</td>
-                <td>O</td>
-                <td>P</td>
-            </tr>
-            <tr>
-                <td>A</td>
-                <td>S</td>
-                <td>D</td>
-                <td>F</td>
-                <td>G</td>
-                <td>H</td>
-                <td>J</td>
-                <td>K</td>
-                <td>L</td>
-                <td>Ç</td>
-            </tr>
-            <tr>
-                <td>Z</td>
-                <td>X</td>
-                <td>C</td>
-                <td>V</td>
-                <td>B</td>
-                <td>N</td>
-                <td>M</td>
-                <td colspan="3">←</td>
-            </tr>
-        </table>
+        <div id="panellSuperior" class="ocult">
+
+        </div>
+        <div id="pantalla" class="ocult">
+
+        </div>
+        <div id="teclat">
+            <div class="row">
+                <button>Q</button>
+                <button>W</button>
+                <button>E</button>
+                <button>R</button>
+                <button>T</button>
+                <button>Y</button>
+                <button>U</button>
+                <button>I</button>
+                <button>O</button>
+                <button>P</button>
+            </div>
+            <div class="row">
+                <button>A</button>
+                <button>S</button>
+                <button>D</button>
+                <button>F</button>
+                <button>G</button>
+                <button>H</button>
+                <button>J</button>
+                <button>K</button>
+                <button>L</button>
+                <button>Ç</button>
+            </div>
+            <div class="row">
+                <button>Z</button>
+                <button>X</button>
+                <button>C</button>
+                <button>V</button>
+                <button>B</button>
+                <button>N</button>
+                <button>M</button>
+                <button id="backspace" colspan="3">←</button>
+            </div>
+        </div>
     </div>
+    <script src="sweetalert2/sweetalert2.all.js"></script>
 </body>
 
 </html>

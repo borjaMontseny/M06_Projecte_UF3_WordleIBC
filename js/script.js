@@ -1,82 +1,95 @@
-// borjaMontseny & AdriaChillon DAW2 M06 2024
+// Borja Montseny & Adria Chillon DAW2 M06 2024
 import dic from './diccionari.js'; // Importem la variable del fitxer diccionari.js
 
-// Definim la clase Jugador que es creará a partir del formulari
-// TODO: Comprobar si a LocalStorage ja hi existeix un jugador
 class Jugador {
-    // Constructor per si es el primer cop que juguem:
-    constructor(nom, cognom, correuElectronic, telefon) {
+    constructor(nom, cognom, correuElectronic, telefon, partidesRealitzades, partidesGuanyades, millorPartida, partidaMesRapida) {
         this.nom = nom;
         this.cognom = cognom;
         this.correuElectronic = correuElectronic;
         this.telefon = telefon;
-    }
-
-    // falta afegir dades de la partida, estadistiques etc
-}
-
-// Funció per a comprobar la RegExp
-function comprobarRegExp(regex, text, checkEx) {
-    console.log(regex, text, checkEx, regex.test(text));
-    if (regex.test(text)) {
-        checkEx.classList.remove('ocult');
-        checkEx.classList.add('visible');
-    } else {
-        checkEx.classList.remove('visible');
-        checkEx.classList.add('ocult');
+        this.partidesRealitzades = partidesRealitzades;
+        this.partidesGuanyades = partidesGuanyades;
+        this.millorPartida = millorPartida;
+        this.partidaMesRapida = partidaMesRapida;
     }
 }
 
-// Expresions Regulars
-var regExpBasica = /^\w+$/; // Per a nom i cognom
+function mostrarOAmagarElement(accio, element) {
+    switch (accio) {
+        case "amagar":
+            element.classList.remove("visible");
+            element.classList.add("ocult");
+            break;
+        case "mostrar":
+            element.classList.remove("ocult");
+            element.classList.add("visible");
+            break;
+        default:
+            break;
+    }
+}
+
+function comprobarRegExp(regex, text) {
+    return regex.test(text);
+}
+
+var isNomValid = false;
+var isCognomValid = false;
+var isCorreuElectronicValid = false;
+var isTelefonValid = false;
+
+var regExpBasica = /^\w+$/;
 var regExpCorreuElectronic = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-var regExpTelegon = /^(?:[9876]\d{8}|[9876]\d{2} \d{3} \d{3}|[9876]\d{1} \d{3} \d{2} \d{2})$/;
+var regExpTelefon = /^(?:[9876]\d{8}|[9876]\d{2} \d{3} \d{3}|[9876]\d{1} \d{3} \d{2} \d{2})$/;
 
-// Carrega la web
 window.onload = function () {
-
-    /* 
-        1ª PART: FORMULARI 
-        - Validem el formulari (utilitzant regExp) i creem l'objecte jugador
-        en cas de que no hi hagin dades prèvies a LocalStorage (anterior partida)
-    */
-
-    // Capturem els elements HTML del formulari, input i check (emoji ✔️)
+    var joc = document.getElementById('joc');
+    var formulari = document.getElementById('formulari');
     var nom = document.getElementById('nom');
-    var valorNom = nom.value;
     var checkNom = document.getElementById('checkNom');
-
     var cognom = document.getElementById('cognom');
-    var valorCognom = document.getElementById('cognom').value;
-    var checkCognom = document.getElementById('checkCogom');
-
-    var correuElectronic = document.getElementById('correuElectronic').value;
+    var checkCognom = document.getElementById('checkCognom');
+    var correuElectronic = document.getElementById('correuElectronic');
     var checkCorreuElectronic = document.getElementById('checkCorreuElectronic');
+    var telefon = document.getElementById('telefon');
+    var checkTelefon = document.getElementById('checkTelefon');
 
-    var telefon = document.getElementById('telefon').value;
-    var checkTelefon = document.getElementById('checkCorreuElectronic');
-
-    // Validem els camps
-    // Nom:
     nom.addEventListener("input", function () {
-        comprobarRegExp(regExpBasica, nom.value, checkNom);
+        isNomValid = comprobarRegExp(regExpBasica, nom.value);
+        mostrarOAmagarElement(isNomValid, checkNom);
     });
 
-    // se validan los campos, se instancia jugador, se guarda en localStorage, y desaparece el formulario
+    cognom.addEventListener("input", function () {
+        isCognomValid = comprobarRegExp(regExpBasica, cognom.value);
+        mostrarOAmagarElement(isCognomValid, checkCognom);
+    });
+
+    correuElectronic.addEventListener("input", function () {
+        isCorreuElectronicValid = comprobarRegExp(regExpCorreuElectronic, correuElectronic.value);
+        mostrarOAmagarElement(isCorreuElectronicValid, checkCorreuElectronic);
+    });
+
+    telefon.addEventListener("input", function () {
+        isTelefonValid = comprobarRegExp(regExpTelefon, telefon.value);
+        mostrarOAmagarElement(isTelefonValid, checkTelefon);
+    })
+
     document.getElementById('formulariJoc').addEventListener('submit', function (event) {
         event.preventDefault();
 
-        // Instanciem l'objecte jugador
-        var jugador = new Jugador(nom, cognom, correuElectronic, telefon);
+        if (isNomValid && isCognomValid && isCorreuElectronicValid && isTelefonValid) {
+            mostrarOAmagarElement("amagar", formulari);
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Valida tots els camps per a començar la partida',
+            });
+        }
 
-        // guardem les dades del jugador en el LocalStorage
+        var jugador = new Jugador(nom.value, cognom.value, correuElectronic.value, telefon.value, 0, 0, 0, 0);
         localStorage.setItem('jugador', JSON.stringify(jugador));
-
-        // treiem les dades de LocalStorage
-        // var retrievedJugador = JSON.parse(localStorage.getItem('jugador'));
-
-        // Ocultar el formulari i mostrar el joc
-        document.getElementById('formulari').classList.add('ocult');
-        document.getElementById('joc').classList.remove('ocult');
+        mostrarOAmagarElement("amagar", formulari);
+        mostrarOAmagarElement("mostrar", joc);
     });
 }

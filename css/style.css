@@ -1,4 +1,6 @@
 /* borjaMontseny & AdriaChillon DAW2 M06 2024 */
+
+/* Dinàmica de classes per ocultar i mostrar elements*/
 .visible {
     display: block;
 }
@@ -7,8 +9,9 @@
     display: none;
 }
 
+/* Formulari */
 #formulari {
-    width: 400px;
+    width: 30%;
     padding: 20px;
     border: 2px solid #ccc;
     border-radius: 10px;
@@ -16,14 +19,27 @@
 }
 
 /* CSS del teclat */
-#teclat table,
-#teclat th,
-#teclat td {
+#teclat .row {
+    display: flex;
+}
+
+#teclat button {
+    width: 40px;
+    height: 40px;
+    margin: 1px;
+    font-size: 16px;
     border: 1px solid black;
     text-align: center;
     border-radius: 10px;
+    background-color: #f9f9f9;
+    cursor: pointer;
 }
 
-#teclat td:hover {
+#teclat #backspace {
+    width: 125px;
+    /* Ancho personalizado para backspace */
+}
+
+#teclat button:hover {
     background-color: lightgray;
 }
