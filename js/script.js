@@ -132,7 +132,12 @@ window.onload = function () {
                     break;
                 case "🔄":
                     // Començar nova partida
-                    console.log("Emoji de actualización clickeado.");
+                    Swal.fire({
+                        icon: "question",
+                        title: "Tornar a començar",
+                        text: "Estàs apunt de reiniciar la partida, estàs segur?",
+                        footer: '<a href="#">Desitjo reiniciar partida</a>'
+                    });
                     break;
                 case "❔":
                     // Guía de com jugar
