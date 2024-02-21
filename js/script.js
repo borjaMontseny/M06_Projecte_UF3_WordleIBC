@@ -45,6 +45,7 @@ var regExpTelefon = /^(?:[9876]\d{8}|[9876]\d{2} \d{3} \d{3}|[9876]\d{1} \d{3} \
 
 window.onload = function () {
     var joc = document.getElementById('joc');
+    var panellSuperiorButtons = document.querySelectorAll(".panellSuperiorButton");
     var formulari = document.getElementById('formulari');
     var nom = document.getElementById('nom');
     var checkNom = document.getElementById('checkNom');
@@ -106,5 +107,45 @@ window.onload = function () {
         }
     });
 
-    // JOC
+    // JOC:
+    // Panell Superior
+    panellSuperiorButtons.forEach(function (button) {
+        button.addEventListener("click", function (event) {
+            // Obtener el emoji clickeado
+            // var botoClicat = button.textContent;
+            var emojiClicked = button.textContent;
+
+            // Ejecutar una función o acción basada en el emoji clickeado
+            switch (emojiClicked) {
+                case "📊":
+                    // Estadístiques
+                    Swal.fire("Estadístiques del Jugador", `
+                    Nom: ${jugador.nom}
+                    Cognom: ${jugador.cognom}
+                    Correu Electrònic: ${jugador.correuElectronic}
+                    Telèfon: ${jugador.telefon}
+                    Partides Realitzades: ${jugador.partidesRealitzades}
+                    Partides Guanyades: ${jugador.partidesGuanyades}
+                    Millor Partida: ${jugador.millorPartida}
+                    Partida Més Ràpida: ${jugador.partidaMesRapida}
+                `);
+                    break;
+                case "🔄":
+                    // Començar nova partida
+                    console.log("Emoji de actualización clickeado.");
+                    break;
+                case "❔":
+                    // Guía de com jugar
+                    Swal.fire({
+                        title: "Com es juga?",
+                        text: "Implementar guia",
+                        icon: "question"
+                    });
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
 }
