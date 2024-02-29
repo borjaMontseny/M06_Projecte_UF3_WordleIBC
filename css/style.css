@@ -1,33 +1,41 @@
-/* borjaMontseny & AdriaChillon DAW2 M06 2024 */
-
 body {
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center; /* Centrado vertical */
     min-height: 100vh;
     margin: 0;
+    background-color: #ccd6df74 !important; /* Fondo oscuro */
 }
 
 @font-face {
     font-family: 'Scrabbles';
-    src: url(/fonts/Scrabbles.ttf);
+    src: url('/fonts/Scrabbles.ttf');
+}
 
+#titleWordle {
+    font-family: 'Scrabbles';
+    font-size: 5em;
+    color: white;
+    line-height: 15px;
 }
 
 h5, h6 {
     line-height: 30px !important;
     text-align: center;
-    font-family: 'Scrabbles';
-    font-size: 6em !important;
+    font-family: 'Scrabbles', Arial, sans-serif; /* Añadido Arial como fallback */
+    font-size: 2em !important; /* Ajustado para mejor visualización */
+    color: #ECF0F1; /* Color claro para contraste */
 }
 
 p {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px !important;
+    font-size: 1em !important;
+    color: #ECF0F1; /* Color claro para contraste */
 }
-/* Classe que serà la mecànica per ocultar i mostrar elements*/
+
+/* Clases para ocultar y mostrar elementos */
 .visible {
     display: block;
 }
@@ -38,73 +46,102 @@ p {
 
 /* Panell Superior */
 #panellSuperior {
-    background-color: lightgray;
+    width: 100%;
+    max-width: 600px;
+    background-color: #34495E; /* Fondo gris oscuro azulado */
     display: flex;
     justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px; /* Bordes redondeados */
 }
 
 #panellSuperior ul {
     list-style-type: none;
     margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
-}
-
-#panellSuperior ul li:nth-child(2) {
-    margin-right: auto;
-    flex-grow: 1;
-}
-
-#panellSuperior ul li:nth-child(3) {
-    margin-right: 20px;
+    gap: 20px;
 }
 
 #panellSuperior ul li button {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
+    background-color: #34495E; /* Botones más oscuros */
+    font-size: 1.5em;
     cursor: pointer;
+    color: #ECF0F1; /* Texto claro */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    border: none; 
 }
 
 #panellSuperior ul li button:focus {
     outline: none;
 }
 
-
 /* Pantalla */
 .paraula {
     display: flex;
     justify-content: center;
+    margin: 5px 0;
 }
 
 .celda {
-    width: 30px;
-    height: 30px;
-    border: 1px solid black;
-    margin: 2px;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #7F8C8D; /* Bordes más estilizados */
+    margin: 5px;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4A5A6A; /* Fondo de celdas */
+    color: #ECF0F1; /* Texto claro */
+    border-radius: 8px; /* Bordes redondeados */
 }
 
 /* Teclat */
+#teclat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
 #teclat .row {
     display: flex;
+    justify-content: center;
 }
 
 #teclat button {
     width: 40px;
     height: 40px;
-    margin: 1px;
+    margin: 5px;
     font-size: 16px;
-    border: 1px solid black;
+    border: 1px solid #7F8C8D; /* Bordes de botones */
     text-align: center;
-    border-radius: 10px;
-    background-color: #f9f9f9;
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #4A5A6A; /* Fondo de botones */
     cursor: pointer;
-}
-
-#teclat #backspace {
-    width: 133px;
+    color: #ECF0F1; /* Texto claro */
 }
 
 #teclat button:hover {
-    background-color: lightgray;
+    background-color: #5C6D7E; /* Sombreado al pasar el mouse */
+}
+
+/* Añadidos para estados de las celdas */
+.correcte {
+    background-color: green;
+    color: white;
+}
+
+.presente {
+    background-color: orange;
+    color: white;
+}
+
+.absent {
+    background-color: grey;
+    color: white;
 }
