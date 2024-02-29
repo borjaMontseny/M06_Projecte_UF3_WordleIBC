@@ -232,7 +232,7 @@ function finalitzarJoc(guanyat) {
             title: 'Has perdut',
             html: `No has aconseguit endevinar la paraula: "${paraulaSecreta}".<br><br> Més sort a la pròxima vegada!`,
             icon: 'error',
-            confirmButtonText: 'error'
+            confirmButtonText: 'Ok'
             });
     }
 
