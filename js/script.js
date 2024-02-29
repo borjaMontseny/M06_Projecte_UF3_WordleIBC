@@ -9,8 +9,8 @@ class Jugador {
         this.telefon = telefon;
         this.partidesRealitzades = 0;
         this.partidesGuanyades = 0;
-        this.millorPartida = Infinity; // Usaremos esta variable para almacenar el menor número de intentos con los que el jugador ha ganado.
-        this.partidaMesRapida = Infinity; // Almacenará el tiempo más rápido en segundos en que el jugador ha ganado.
+        this.millorPartida = Infinity; // Menor número de intentos con los que el jugador ha ganado.
+        this.partidaMesRapida = Infinity; // Tiempo más rápido en segundos en que el jugador ha ganado.
     }
 }
 
@@ -32,9 +32,9 @@ function iniciar() {
     configurarEventListeners();
     if (jugador) {
         mostrarOAmagarElement('mostrar', document.getElementById('joc'));
-        iniciarJoc(); // Inicia el juego automáticamente si hay datos de jugador
+        iniciarJoc();
     } else {
-        mostrarForm(); // Muestra el formulario si no hay datos de jugador
+        mostrarForm();
     }
 }
 
@@ -99,18 +99,16 @@ function iniciarJoc() {
     console.log(paraulaSecreta);
     intents = 0;
     juegoFinalizado = false;
-    juegoIniciado = true; // El juego comienza aquí
+    juegoIniciado = true;
     iniciPartida = new Date();
     prepararUIPerNouJoc();
     mostrarOAmagarElement('mostrar', document.getElementById('joc'));
-    // Habilitar teclas
     document.querySelectorAll('#teclat button').forEach(tecla => {
         tecla.disabled = false;
     });
 }
 
 function escollirParaulaSecreta() {
-    // Asegurándonos de que solo seleccionamos palabras de 5 letras.
     let palabrasDeCincoLetras = dic.filter(palabra => palabra.length === 5);
     const indexAleatori = Math.floor(Math.random() * palabrasDeCincoLetras.length);
     return palabrasDeCincoLetras[indexAleatori].toUpperCase();
@@ -142,13 +140,12 @@ function manejarTeclaFisica(event) {
         } else if (/^[a-zA-ZçÇ]$/.test(event.key)) {
             afegirLletra(event.key.toUpperCase());
         } else if (event.key === 'Enter') {
-            event.preventDefault(); // Previene el comportamiento predeterminado del evento
-            event.stopPropagation(); // Detiene la propagación del evento
+            event.preventDefault();
+            event.stopPropagation();
             comprovarIntent();
         }
     }
 }
-
 
 function afegirLletra(lletra) {
     if (intents < maxIntents) {
@@ -208,63 +205,69 @@ function marcarCeldas(filaActual, paraulaIntroduida) {
 }
 
 function finalitzarJoc(guanyat) {
-    const tempsPartida = ((new Date()) - iniciPartida) / 1000;
+    const tempsPartida = ((new Date()) - iniciPartida) / 1000; // Tiempo en segundos
     jugador.partidesRealitzades++;
-    juegoFinalizado = true;
-    juegoIniciado = false;
 
     if (guanyat) {
         jugador.partidesGuanyades++;
-
-        // Actualiza si es el menor número de intentos para ganar
-        if (intents < jugador.millorPartida || jugador.millorPartida === Infinity) {
+        // Actualizar si es la mejor partida (menor número de intentos)
+        if (jugador.millorPartida === Infinity || intents < jugador.millorPartida) {
             jugador.millorPartida = intents;
         }
 
-        // Actualiza si es el tiempo más rápido para ganar
-        if (tempsPartida < jugador.partidaMesRapida || jugador.partidaMesRapida === Infinity) {
+        // Actualizar si es la partida más rápida
+        if (jugador.partidaMesRapida === Infinity || tempsPartida < jugador.partidaMesRapida) {
             jugador.partidaMesRapida = tempsPartida;
         }
 
         Swal.fire({
-            title: '¡Enhorabuena!',
-            text: `¡Has ganado! La palabra era "${paraulaSecreta}" y has tardado ${tempsPartida.toFixed(2)} segundos.`,
+            title: 'Enhorabona!',
+            text: `Has guanyat en ${intents} intents i el teu temps ha estat de ${tempsPartida.toFixed(2)} segons.`,
             icon: 'success',
             confirmButtonText: 'Ok'
         });
     } else {
+        // Aquesta és la part afegida per mostrar el missatge de derrota
         Swal.fire({
-            title: '¡Oh, no!',
-            text: `Has perdido. La palabra era "${paraulaSecreta}".`,
+            title: 'Has perdut',
+            html: `No has aconseguit endevinar la paraula: "${paraulaSecreta}".<br><br> Més sort a la pròxima vegada!`,
             icon: 'error',
-            confirmButtonText: 'Ok'
-        });
+            confirmButtonText: 'error'
+            });
     }
-    // Deshabilitar todas las teclas al finalizar el juego
-    document.querySelectorAll('#teclat button').forEach(tecla => {
-        tecla.disabled = true;
-    });
 
-    localStorage.setItem('jugador', JSON.stringify(jugador)); // Guardar el estado actualizado en localStorage
-    document.querySelectorAll('#teclat button').forEach(tecla => tecla.disabled = true);
+    juegoFinalizado = true;
+    juegoIniciado = false;
+
+    // Aquí es crucial guardar el estado actualizado en localStorage
+    localStorage.setItem('jugador', JSON.stringify(jugador));
+
+    // Deshabilitar teclas, etc.
 }
 
 function mostrarEstadistiques() {
+    // Asegurarse de cargar los datos más recientes del jugador desde localStorage
+    actualizarDatosJugadorDesdeLocalStorage();
+
     Swal.fire({
         title: 'Estadístiques',
         html: `
-            Nom: ${jugador.nom}<br>
-            Cognom: ${jugador.cognom}<br>
-            Correu Electrònic: ${jugador.correuElectronic}<br>
-            Telèfon: ${jugador.telefon}<br>
-            Partides Realitzades: ${jugador.partidesRealitzades}<br>
-            Partides Guanyades: ${jugador.partidesGuanyades}<br>
-            Millor Partida (en intents): ${jugador.millorPartida === Infinity ? 'N/A' : jugador.millorPartida}<br>
-            Partida Més Ràpida (en segons): ${jugador.partidaMesRapida === Infinity ? 'N/A' : jugador.partidaMesRapida.toFixed(2)}<br>`,
+            Nom i Cognoms: ${jugador.nom} ${jugador.cognom}<br><br>
+            Correu Electrònic: ${jugador.correuElectronic}<br><br>
+            Telèfon: ${jugador.telefon}<br><br>
+            Partides Realitzades: ${jugador.partidesRealitzades}<br><br>
+            Partides Guanyades: ${jugador.partidesGuanyades}<br><br>
+            Millor Partida (en intents): ${jugador.millorPartida !== Infinity ? jugador.millorPartida : 'N/D'}<br><br>
+            Partida Més Ràpida (en segons): ${jugador.partidaMesRapida !== Infinity ? jugador.partidaMesRapida.toFixed(2) : 'N/D'}<br>`,
         icon: 'info'
     });
 }
-
+function actualizarDatosJugadorDesdeLocalStorage() {
+    const datosJugador = localStorage.getItem('jugador');
+    if (datosJugador) {
+        jugador = JSON.parse(datosJugador);
+    }
+}
 function mostrarAjuda() {
     Swal.fire({
         title: 'Com jugar al WordleIBC?',
