@@ -25,7 +25,7 @@ h5, h6 {
     line-height: 30px !important;
     text-align: center;
     font-family: 'Scrabbles', Arial, sans-serif; /* Añadido Arial como fallback */
-    font-size: 2em !important; /* Ajustado para mejor visualización */
+    font-size: 5em !important; /* Ajustado para mejor visualización */
     color: #ECF0F1; /* Color claro para contraste */
 }
 

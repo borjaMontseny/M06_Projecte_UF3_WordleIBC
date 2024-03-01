@@ -14,7 +14,7 @@ class Jugador {
     }
 }
 
-let jugador = JSON.parse(localStorage.getItem('jugador')) || null;
+let jugador = JSON.parse(sessionStorage.getItem('jugador')) || null;
 const modal = new bootstrap.Modal(document.getElementById("modalForm"), {
     keyboard: false
 });
@@ -28,20 +28,14 @@ let juegoFinalizado = false;
 document.addEventListener('DOMContentLoaded', iniciar);
 
 function iniciar() {
-    cargarJugadorLocalStorage();
-    configurarEventListeners();
-    if (jugador) {
+    if (jugador && jugador.nom && jugador.cognom && jugador.correuElectronic && jugador.telefon) {
         mostrarOAmagarElement('mostrar', document.getElementById('joc'));
         iniciarJoc();
     } else {
+        jugador = null; // Asegurarse de que el jugador se reinicia si los datos son incompletos.
         mostrarForm();
     }
-}
-
-function cargarJugadorLocalStorage() {
-    if (jugador) {
-        mostrarOAmagarElement('mostrar', document.getElementById('joc'));
-    }
+    configurarEventListeners();
 }
 
 function configurarEventListeners() {
@@ -59,7 +53,7 @@ function configurarEventListeners() {
 }
 
 function mostrarForm() {
-    if (!jugador) modal.show();
+    modal.show();
 }
 
 function mostrarOAmagarElement(accio, element) {
@@ -76,7 +70,8 @@ function validarFormulari(event) {
 
     if (nom && cognom && validarEmail(correuElectronic) && validarTelefon(telefon)) {
         jugador = new Jugador(nom, cognom, correuElectronic, telefon);
-        localStorage.setItem('jugador', JSON.stringify(jugador));
+        sessionStorage.setItem('jugador', JSON.stringify(jugador));
+        mostrarOAmagarElement('mostrar', document.getElementById('joc'));
         modal.hide();
         iniciarJoc();
     } else {
