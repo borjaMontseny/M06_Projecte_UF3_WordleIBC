@@ -249,6 +249,8 @@ function mostrarEstadistiques() {
     // Asegurarse de cargar los datos más recientes del jugador desde localStorage
     actualizarDatosJugadorDesdeLocalStorage();
 
+    const partidaMesRapidaFormatted = jugador.partidaMesRapida !== Infinity && jugador.partidaMesRapida != null ? jugador.partidaMesRapida.toFixed(2) : 'N/D';
+
     Swal.fire({
         title: 'Estadístiques',
         html: `
@@ -258,10 +260,11 @@ function mostrarEstadistiques() {
             Partides Realitzades: ${jugador.partidesRealitzades}<br><br>
             Partides Guanyades: ${jugador.partidesGuanyades}<br><br>
             Millor Partida (en intents): ${jugador.millorPartida !== Infinity ? jugador.millorPartida : 'N/D'}<br><br>
-            Partida Més Ràpida (en segons): ${jugador.partidaMesRapida !== Infinity ? jugador.partidaMesRapida.toFixed(2) : 'N/D'}<br>`,
+            Partida Més Ràpida (en segons): ${partidaMesRapidaFormatted}<br>`,
         icon: 'info'
     });
 }
+
 function actualizarDatosJugadorDesdeLocalStorage() {
     const datosJugador = localStorage.getItem('jugador');
     if (datosJugador) {
